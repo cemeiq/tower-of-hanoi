@@ -125,22 +125,49 @@ def game_loop():
     while not over:
 
         # Getting the x-axis and y-axis of the mouse cursor 
+        x_pos = pygame.mouse.get_pos()[0]
+        y_pos = pygame.mouse.get_pos()[1]
 
         for event in pygame.event.get():
 
             if event.type == pygame.QUIT:
                 over = True
 
-            if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+            elif event.type == pygame.KEYDOWN:
+                if event.type == pygame.K_SPACE and win:
+                    # reset the games
+                   bar_a = [1, 2, 3]
+                   bar_b = []
+                   bar_c = []
+                   win = False
+                   watch = False
+
+            elif event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
 
                 if a.collidepoint(pygame.mouse.get_pos()):
                     clicked = True
                     disk = 1
 
-                if b.collidepoint(pygame.mouse.get_pos()):
+                if b.collidepoint(pygame.mouse.get_pos()) and not a.collidepoint(b.x + (disk_width+50)/2, b.y-1):
                     clicked = True
                     disk = 2
 
-                if c.collidepoint(pygame.mouse.get_pos()):
+                if c.collidepoint(pygame.mouse.get_pos()) and not a.collidepoint(c.x + (disk_width+100)/2, c.y-1) and not b.collidepoint(c.x + (disk_width+100)/2, c.y-1):
                     clicked = True
-                    disk = 3       
+                    disk = 3    
+
+            elif event.type == pygame.MOUSEBUTTONUP and event.button == 1:
+                if x_pos >= bar_a.x - 20 and x_pos <= bar_a.x + tower_width and y_pos >= tower_height and y_pos <= bottom_height and clicked:
+                    update_list(bar_a)
+                elif x_pos >= bar_b.x - 20 and x_pos <= bar_b.x + tower_width and y_pos >= tower_height and y_pos <= bottom_height and clicked:
+                    update_list(bar_b)
+                elif x_pos >= bar_c.x - 20 and x_pos <= bar_c + tower_width and y_pos >= tower_height and y_pos <= bottom_height and clicked:
+                    update_list(bar_c)
+                clicked = False
+                disk = 0
+
+                 
+
+
+
+               
