@@ -5,7 +5,7 @@ screen_width = 1000
 screen_height = 600
 screen = pygame.display.set_mode((screen_width, screen_height))
 pygame.display.set_caption('Tower of Hanoi Game')
-pygame.image.load('/home/iqra/Tower_of_hanoi/background.jpeg')
+background = pygame.image.load('/home/iqra/Tower_of_hanoi/background.jpeg')
 black = (0, 0, 0)
 
 # number of levels in game
@@ -122,6 +122,8 @@ def display_text():
 def game_loop():
     clock = pygame.time.Clock()
 
+    
+
     while not over:
 
         # Getting the x-axis and y-axis of the mouse cursor 
@@ -166,7 +168,7 @@ def game_loop():
                 clicked = False
                 disk = 0
 
-                 
+             
 
 
 
